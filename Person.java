@@ -1,18 +1,17 @@
-public class Person
+public class Person implements Comparable
 {
-	/***** TODO: (Part 2) create helper inner class for Identity*****/
-
 	// CONSTANT VARIABLES
 	public static final String DEFAULT_NAME = "Jamie Doe";
-	public static final String DEFAULT_STORY =  "Unknown";
+	public static final Identity DEFAULT_STORY =  new Identity("Unknown", "Unknown");
 	public static final int DEFAULT_PRIVILEGE = 100;
 
 	// INSTANCE VARIABLES
-	private String name, story;
+	private String name; 
+	private Identity story;
 	private int privilege;
 
 	// CONSTRUCTORS	
-	public Person(String name, String story, int privilege) {
+	public Person(String name, Identity story, int privilege) {
 		this.setAll(name, story, privilege);
 	}
 		
@@ -33,7 +32,7 @@ public class Person
 		this.name = name;
 	}
 
-	public void setStory(String story) {
+	public void setStory(Identity story) {
 		this.story = story;
 	}
 
@@ -41,7 +40,7 @@ public class Person
 		this.privilege = privilege;
 	}
 
-	public void setAll(String name, String story, int privilege) {
+	public void setAll(String name, Identity story, int privilege) {
 		this.setPrivilege(privilege);
 		this.setName(name);
 		this.setStory(story);
@@ -52,7 +51,7 @@ public class Person
 		return this.name;
 	}
 		
-	public String getStory() {
+	public Identity getStory() {
 		return this.story;
 	}
 
@@ -71,8 +70,9 @@ public class Person
 	@Override
 	public boolean equals(Object other) 
 	{
-		if(other == null || (!(other instanceof Person))) {
-		      return false;
+		if (other == null || (!(other instanceof Person))) 
+		{
+		    return false;
 		}
 		
 		Person otherPerson = (Person) other;
@@ -81,5 +81,31 @@ public class Person
 	}
 
 	// INTERFACE METHODS
-	/***** TODO: (Part 1) override compareTo method to implement Comparable interface*****/
+	@Override
+	public int compareTo(Object o)
+	{
+		if(o == null || (!(o instanceof Person)))
+		{
+			throw new IllegalArgumentException("Calling object is not an instance of a Person class.");
+		}
+
+		Person other = (Person) o;
+		int result = -2;
+
+		if (this.privilege < other.privilege)
+		{
+			result = -1; //-1 = first object is less than second object
+		}
+		else if(this.privilege == other.privilege)
+		{
+			result = 0; //0 = objects are equal
+		}
+		else if(this.privilege > other.privilege)
+		{
+			result = 1; //1 = second object is less than first object
+		}
+
+		return result;
+	}
+
 }

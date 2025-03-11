@@ -34,10 +34,10 @@ public class Main
 	public static void main(String[] args)
 	{
 		// DECLARATION + INITIALIZATION
-		Person p1 = new Person("Amira", "I am a Syrian refugee.", 40);
-		Person p2 = new Person("D'Andra", "I am an African-American trans woman.", -20);
-		Person p3 = new Person("Jennifer", "I am a New Yorker", 140);
-		Person p4 = new Person("Pete", "I am a guy from Pennsylvania", 200);
+		Person p1 = new Person("Amira", new Identity("she/her/hers", "I am a Syrian refugee."), 40);
+		Person p2 = new Person("D'Andra", new Identity("she/her/hers", "I am an African-American trans woman."), -20);
+		Person p3 = new Person("Jennifer", new Identity("they/them/their(s)", "I am a New Yorker"), 140);
+		Person p4 = new Person("Pete", new Identity("he/him/his", "I am a guy from Pennsylvania"), 200);
 		Person self = new Person();
 		Person[] people = {p1, p2, p3, p4, self};
 		boolean done = false;
@@ -73,8 +73,21 @@ public class Main
 					System.out.println(self);
 					break;
 				case 3:
-					/***** TODO: (Part 1) implement a comparison case using the comparable method on the Person class to compare self to p1-p4*****/
-					
+					for (int i = 0; i < 4; i++)
+					{
+						if(self.compareTo(people[i]) > 0)
+						{
+							System.out.println("You have more priviledge than " + people[i].getName());
+						}
+						else if(self.compareTo(people[i]) == 0)
+						{
+							System.out.println("You have equal priviledge to " + people[i].getName());
+						}
+						else if(self.compareTo(people[i]) < 0)
+						{
+							System.out.println("You have less priviledge than " + people[i].getName());
+						}
+					}
 					System.out.println("\nReturning to main menu.\n");
 					break;
 				case 4:
@@ -93,18 +106,27 @@ public class Main
 			"in our own growth and self-reflection. We appreciate you taking that journey with us! :D");
 	}
 
-	/***** TODO: (Part 2) upgrade method to ask user for pronouns and background info *****/
+	
 	public static void fillInfo(Person person){
 		//sets default privilege prior to questionnaire to 100
-		String name, story;
+		String name, pronouns, background;
+		Identity story;
 		
 		System.out.println("What is your name? ");
 		name = keyboard.nextLine();
-		System.out.println("\nHello " + name + ", write a small self-identifying statement about yourself "
+		System.out.println("\nHello " + name + "!");
+		System.out.println("Here is a list of common examples of preferred pronouns:");
+		System.out.println("Gender Neutral/Nonbirary: they/them/their(s) or ze/hir/hirs");
+		System.out.println("Feminine: she/her/hers");
+		System.out.println("Masculine: he/him/his");
+		System.out.println("What are your preferred pronouns?");
+		pronouns = keyboard.nextLine();
+
+		System.out.println("\nPlease share a small self-identifying statement about yourself "
 				+ "and your background and identity, this can be anything you like!\n"
 				+ "For example: I'm a [nationality / place of origin / ethnicity / sexuality / gender expression / etc.]...");
-		System.out.println("Tell us about yourself: ");
-		story = keyboard.nextLine();
+		background = keyboard.nextLine();
+		story = new Identity(pronouns, background);
 		
 		person.setName(name);
 		person.setStory(story);
