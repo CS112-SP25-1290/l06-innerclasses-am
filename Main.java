@@ -34,10 +34,10 @@ public class Main
 	public static void main(String[] args)
 	{
 		// DECLARATION + INITIALIZATION
-		Person p1 = new Person("Amira", new Identity("she/her/hers", "I am a Syrian refugee."), 40);
-		Person p2 = new Person("D'Andra", new Identity("she/her/hers", "I am an African-American trans woman."), -20);
-		Person p3 = new Person("Jennifer", new Identity("they/them/their(s)", "I am a New Yorker"), 140);
-		Person p4 = new Person("Pete", new Identity("he/him/his", "I am a guy from Pennsylvania"), 200);
+		Person p1 = new Person("Amira","she/her/hers", "I am a Syrian refugee.", 40);
+		Person p2 = new Person("D'Andra", "she/her/hers", "I am an African-American trans woman.", -20);
+		Person p3 = new Person("Jennifer", "they/them/their(s)", "I am a New Yorker", 140);
+		Person p4 = new Person("Pete", "he/him/his", "I am a guy from Pennsylvania", 200);
 		Person self = new Person();
 		Person[] people = {p1, p2, p3, p4, self};
 		boolean done = false;
@@ -110,7 +110,7 @@ public class Main
 	public static void fillInfo(Person person){
 		//sets default privilege prior to questionnaire to 100
 		String name, pronouns, background;
-		Identity story;
+		
 		
 		System.out.println("What is your name? ");
 		name = keyboard.nextLine();
@@ -126,10 +126,9 @@ public class Main
 				+ "and your background and identity, this can be anything you like!\n"
 				+ "For example: I'm a [nationality / place of origin / ethnicity / sexuality / gender expression / etc.]...");
 		background = keyboard.nextLine();
-		story = new Identity(pronouns, background);
-		
 		person.setName(name);
-		person.setStory(story);
+		person.setPronouns(pronouns);
+		person.setBackground(background);
 	}
 
 	public static int doPrivilegeQuestionnaire() {
